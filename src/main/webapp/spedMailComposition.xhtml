@@ -1,0 +1,114 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+		<p:commandButton value="Scrivi" type="button"
+			onclick="PF('mailmodal').show()"></p:commandButton>
+
+		<p:dialog header="Scrivi Mail" widgetVar="mailmodal" modal="true"
+			resizable="false" height="90%" width="90%" draggable="false">
+			<p:panel id="mailbox">
+				<p:panelGrid columns="3">
+					<p:outputLabel value="A: " />
+					<p:inputText id="mittente"
+						requiredMessage="il mittente è richiesto" required="true"
+						value="#{mailBean.a}" />
+					<p:message for="mittente" showDetail="true" />
+					<p:outputLabel value="Cc: " />
+					<p:inputText id="conoscenza" requiredMessage="valore non inserito"
+						required="true" value="#{mailBean.cc}" />
+					<p:message for="conoscenza" showDetail="true" />
+					<p:outputLabel value="Oggetto: " />
+					<p:inputText id="oggetto" requiredMessage="valore non inserito"
+						required="true" value="#{mailBean.oggetto}" />
+					<p:message for="oggetto" showDetail="true" />
+					<p:outputLabel value="Testo:" />
+					<p:inputTextarea id="testo" requiredMessage="valore non inserito"
+						required="true" value="#{mailBean.txt}" row="40" col="40" />
+					<p:message for="testo" showDetail="true" />
+				</p:panelGrid>
+			</p:panel>
+			<p:commandButton value="Invia" update="mailbox,:form1:tview, growl"
+				process="@form " action="#{mailBean.invia()}" />
+		</p:dialog>
+		<p:tabView id="tview" dynamic="true" cache="true" effect="fold">
+			<p:tab title="Posta Arrivata" id="tabarrivata">
+				<p:panel id="arrivata">
+					<p:panelGrid id="srchMailPanel">
+						<p:outputLabel value="Da: " />
+						<p:inputText id="da" value="#{mailBean.srchDa}" />
+						<p:outputLabel value="Oggetto: " />
+						<p:inputText id="oggetto" value="#{mailBean.srchOggetto}" />
+						<p:commandButton id="cerca" value="Cerca" update="tview"
+							process="srchMailPanel" action="#{mailBean.cerca()}" />
+					</p:panelGrid>
+					<p:dataTable id="arrived" var="m" value="#{mailBean.lstArrived}"
+						paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						<p:column headerText="Da">
+	    				#{m.da}
+	    			</p:column>
+						<p:column headerText="Cc">
+	    				#{m.cc}
+	    			</p:column>
+						<p:column headerText="oggetto">
+							<f:facet name="header">oggetto: </f:facet>
+				#{m.oggetto}
+			</p:column>
+						<p:column style="width:32px;text-align: center">
+							<p:commandButton process="@this" update=":form1:labTxt"
+								oncomplete="PF('txtpanel').show()" icon="ui-icon-mail-open"
+								title="View">
+								<f:setPropertyActionListener value="#{m.txt}"
+									target="#{mailBean.txt}" />
+							</p:commandButton>
+							<p:commandButton process="arrived" update="arrived"
+								icon="ui-icon-trash" action="#{mailBean.cestina(m)}"
+								title="Erase" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+			<p:tab title="Posta Inviata" id="tabinviata">
+				<p:panel id="inviata" header="Posta Inviata">
+					<p:dataTable id="table" var="o" value="#{mailBean.lstMail}"
+						paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						<p:column headerText="A">
+	    				#{o.a}
+	    			</p:column>
+						<p:column headerText="Cc">
+	    				#{o.cc}
+	    			</p:column>
+						<p:column headerText="oggetto">
+							<f:facet name="header">oggetto: </f:facet>
+				#{o.oggetto}
+			</p:column>
+						<p:column style="width:32px;text-align: center">
+							<p:commandButton update=":form1:labTxt" process="@this"
+								oncomplete="PF('txtpanel').show()" icon="ui-icon-mail-open"
+								title="View">
+								<f:setPropertyActionListener value="#{o.txt}"
+									target="#{mailBean.txt}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+		</p:tabView>
+
+		<p:dialog id="txtpanel" modal="true" widgetVar="txtpanel"
+			draggable="false" resizable="false">
+			<p:panelGrid columns="1">
+				<p:outputLabel id="labTxt" value="#{mailBean.txt}" />
+			</p:panelGrid>
+		</p:dialog>
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage value="/ajax_loader.gif" />
+		</p:dialog>
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+</ui:composition>

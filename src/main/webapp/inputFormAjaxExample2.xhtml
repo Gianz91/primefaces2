@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel id="basic" header="InputFormAjax2">
+			<p:panelGrid columns="2">
+
+				<p:outputLabel id="inputText" value="inputText" />
+				<p:inputText value="#{inputFormBean.inputText}">
+					<f:ajax event="keyup" listener="#{inputFormBean.submit()}" />
+				</p:inputText>
+
+				<p:outputLabel id="password" value="password" />
+				<p:password value="#{inputFormBean.password}">
+					<f:ajax event="keyup" listener="#{inputFormBean.submit()}" />
+				</p:password>
+
+				<p:outputLabel value="inputTextarea" />
+				<p:inputTextarea row="10" col="10"
+					value="#{inputFormBean.inputTextarea}">
+					<f:ajax event="keyup" listener="#{inputFormBean.submit()}" />
+				</p:inputTextarea>
+
+				<p:outputLabel value="checkbox" />
+				<p:selectBooleanCheckbox value="#{inputFormBean.checkbox}">
+					<f:ajax event="change" listener="#{inputFormBean.submit()}" />
+				</p:selectBooleanCheckbox>
+				
+				<p:outputLabel value="manyCheckbox" />
+		   		<p:selectManyCheckbox  value="#{inputFormBean.manyCheckbox}">
+		            <f:selectItem itemValue="sono 1" itemLabel="Item 1" />
+		            <f:selectItem itemValue="sono 2" itemLabel="Item 2"  />
+		            <f:ajax event="change" listener="#{inputFormBean.submit()}" />
+		        </p:selectManyCheckbox>
+
+				<p:outputLabel value="selectOneRadio" />
+				<p:selectOneRadio value="#{inputFormBean.selectOneRadio}">
+					<f:selectItem itemValue="sono uno" itemLabel="Item 1" />
+					<f:selectItem itemValue="sono due" itemLabel="Item 2" />
+					<f:ajax event="change" listener="#{inputFormBean.submit()}" />
+				</p:selectOneRadio>
+
+				<p:outputLabel value="selectOneMenu" />
+				<p:selectOneMenu value="#{inputFormBean.selectOneMenu}">
+					<f:selectItem itemValue="menu 1" itemLabel="Item 1" />
+					<f:selectItem itemValue="menu 2" itemLabel="Item 2" />
+					<f:ajax event="change" listener="#{inputFormBean.submit()}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="selectOneListbox" />
+				<p:selectOneListbox value="#{inputFormBean.selectOneListbox}">
+					<f:selectItem itemValue="lista 1" itemLabel="Item 1" />
+					<f:selectItem itemValue="lista 2" itemLabel="Item 2" />
+					<f:ajax event="change" listener="#{inputFormBean.submit()}" />
+				</p:selectOneListbox>
+				
+				<p:column>
+				<p:outputLabel value="selectManyListbox" />
+				<br/>
+				<p:link href="http://stackoverflow.com/questions/20888088/pmultiselectlistbox-with-ajax" value="link" />				
+				</p:column>
+				<p:multiSelectListbox value="#{inputFormBean.selectManyListbox}">
+					<f:selectItem itemValue="selectManyListbox 1" itemLabel="Item 1" />
+					<f:selectItem itemValue="selectManyListbox 2" itemLabel="Item 2" />
+			    </p:multiSelectListbox>
+
+				<p:outputLabel value="inputHidden" />
+				<h:inputHidden value="#{inputFormBean.inputHidden}" />
+
+				<p:outputLabel value="img" />
+				<p:graphicImage value="/evolution.png">
+					<f:ajax event="mouseover" listener="#{inputFormBean.submit()}" />
+				</p:graphicImage>
+
+				<p:outputLabel value="outputFormat" />
+				<h:outputFormat value="parameter 1 : {0}, parameter 2 : {1}">
+					<f:param value="Item 1" />
+					<f:param value="Item 2" />
+				</h:outputFormat>
+
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+
+
+

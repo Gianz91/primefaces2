@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+<!--     <p:graphicImage name="loader"  value="/ajax_loader.gif"/> -->
+<p:graphicImage value="/ajax_loader.gif"/>
+</p:dialog>
+
+	<h:form>
+		<p:panel header="InputFormAjax 3">
+			<h:panelGrid columns="4">
+	
+				f:ajax 
+	
+				<p:outputLabel id="inputText" value="inputText" />
+				<p:inputText value="#{inputFormBean.inputText}">
+					<f:ajax event="keyup" render="test" />
+				</p:inputText>
+				<p:outputLabel id="test" value="#{inputFormBean.inputText}" />
+	
+				p:ajax
+	
+				<p:outputLabel id="inputText2" value="inputText" />
+				<p:inputText value="#{inputFormBean.inputText}">
+					 <p:ajax event="keyup" update="test2" />
+				</p:inputText>
+				<p:outputLabel id="test2" value="#{inputFormBean.inputText}" />
+	
+	
+				p:ajax global false
+	
+				<p:outputLabel id="inputText3" value="inputText" />
+				<p:inputText value="#{inputFormBean.inputText}">
+					 <p:ajax event="keyup" update="test3" global="false" />
+				</p:inputText>
+				<p:outputLabel id="test3" value="#{inputFormBean.inputText}"/>
+	
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+
+
+

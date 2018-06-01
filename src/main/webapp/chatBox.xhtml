@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<script>
+		var myInterval = setInterval(function() {
+			chatRemote();
+		}, 1000);
+		function aMiaScelta() {
+			clearInterval(myInterval);
+
+		}
+	</script>
+</h:head>
+<h:body>
+	<h:form>
+		<p:poll update="chatbox" interval="2" value="#{chatBean.retrieve}" />
+		<p:commandButton value="vai alle Mail"
+			action="#{chatBean.nomeCheVoglio}" />
+		<p:outputLabel value="Sender: " />
+		<p:inputText id="sender" value="#{chatBean.sender}" />
+		<p:outputLabel value="Message: " />
+		<p:inputText id="message" value="#{chatBean.mess}" />
+		<p:commandButton value="Invia in chat"
+			process="@this, sender, message, chatbox" action="#{chatBean.insert()}" />
+		<p:dataTable id="chatbox" var="mes" value="#{chatBean.trail}">
+			<p:column>#{mes.messaggio}</p:column>
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>

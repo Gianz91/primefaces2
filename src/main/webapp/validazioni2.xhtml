@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+  <p:growl id="growl" showDetail="true" sticky="true" />  
+	<h:form>
+	
+		<p:panel id="basic" header="Validazioni 2">
+			<p:messages style="color:red;margin:8px;" />
+			<h:panelGrid columns="3" cellpadding="5">
+				<p:outputLabel for="username" value="username" />
+				<p:inputText id="username" value="#{loginBean.username}"
+					required="true" label="username">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="username" display="icon" showDetail="true" />
+
+				<p:outputLabel for="password" value="password" />
+				<p:password id="password" value="#{loginBean.password}"
+					label="password" required="true">
+					<f:validateLength minimum="2" />
+				</p:password>
+				<p:message for="password" display="icon" showDetail="true" />
+ 
+				 <p:commandButton value="Save" update="@form, growl" icon="ui-icon-check" validateClient="true"/>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+
+
+

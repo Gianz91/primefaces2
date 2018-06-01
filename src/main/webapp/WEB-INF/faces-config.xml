@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+	
+	
+	<managed-bean>
+	<managed-bean-name>now</managed-bean-name>
+	<managed-bean-class>java.util.Date</managed-bean-class>
+	<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>page2</from-outcome>
+			<to-view-id>/page1.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>page3</from-outcome>
+			<to-view-id>/page1.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>page1.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>page2</from-outcome>
+			<to-view-id>/page2.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>page2.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>page3</from-outcome>
+			<to-view-id>/page3.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>chatBox.xhtml</from-view-id>
+		<navigation-case>
+		<from-outcome>mailpage</from-outcome>
+		<to-view-id>/registrationForm.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>accettazione.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>vai</from-outcome>
+			<if>#{navigationBean.accettazione}</if>
+			<to-view-id>ok.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<application>
+		<locale-config>
+			<default-locale>it</default-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>it.daguanno.corso.message.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+	</application>
+	  <application>
+	  <message-bundle>
+	  	it.daguanno.corso.message.overwriteMessage
+	  </message-bundle>
+     </application>
+</faces-config>

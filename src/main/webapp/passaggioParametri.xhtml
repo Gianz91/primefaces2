@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel id="basic" header="passaggio parametri">
+			<h:panelGrid columns="1">
+	
+				<p:commandButton value="test1" action="#{paramBean.outcome}">
+					<f:param name="param1" value="ciao 1 sono parametro 1" />
+				</p:commandButton>
+				<p:commandButton value="test2" actionListener="#{paramBean.outcome2}">
+					<f:attribute name="param1" value="ciao 2 sono parametro 1" />
+				</p:commandButton>
+				<p:commandButton value="test3" action="#{paramBean.outcome}" >
+					<f:setPropertyActionListener target="#{paramBean.param1}" value="ciao 3 sono parametro 1" />
+				</p:commandButton>
+				<p:commandButton value="test4" action="#{paramBean.outcome3('1')}" />
+				
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+
+
+

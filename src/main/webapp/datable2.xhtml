@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel header="datatable">
+			<h:panelGrid columns="2">
+				<p:outputLabel value="id" />
+				<p:inputText value="#{tabellaBean.id}" />
+				<p:outputLabel value="valore" />
+				<p:inputText value="#{tabellaBean.valore}" />
+							 <p:commandButton value="Ajax" process="@form" update="table" actionListener="#{tabellaBean.aggiungi()}" />		
+			</h:panelGrid>
+
+				<p:dataTable id="table" var="o" value="#{tabellaBean.lstOggetti}"
+						rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+					<p:column headerText="id">
+	    				#{o.id}
+	    			</p:column>
+					<p:column headerText="valore">
+						<f:facet name="header">valore</f:facet>
+	    				#{o.valore}
+	    			</p:column>
+					<p:column headerText="data">
+						<h:outputText value="#{o.date}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+
+
+

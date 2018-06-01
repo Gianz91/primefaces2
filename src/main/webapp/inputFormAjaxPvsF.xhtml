@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel id="basic" header="p:ajax vs h:ajax">
+			<h:panelGrid columns="1">
+				<p:columns>
+		    p:ajax utilizza update/process invece che render/execute
+		    </p:columns>
+				<p:columns>
+		    p:ajax processo di default @form invece f:ajax usa default @this
+		    </p:columns>
+				<p:columns>
+		    p:ajax e' integrato con p:ajaxStatus
+		    </p:columns>
+				<p:columns>
+		    p:ajax usa parametri di callback 
+		    </p:columns>
+				<p:columns>
+		    p:ajax usa jQuery per la manipolazione del DOM 
+		    </p:columns>
+		    alcuni eventi:
+		        blur
+			    change
+			    click
+			    dblclick
+			    focus
+			    keydown
+			    keypress
+			    keyup
+			    mousedown
+			    mousemove
+			    mouseout
+			    mouseover
+			    mouseup
+			    select
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	
+	
+
+	
+	
+</h:body>
+</html>
+
+
+

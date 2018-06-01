@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel id="basic" header="InputForm">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="inputText" />
+				<p:inputText value="#{inputFormBean.inputText}" />
+
+				<p:outputLabel value="password" />
+				<p:password value="#{inputFormBean.password}" />
+
+				<p:outputLabel value="inputTextarea" />
+				<p:inputTextarea row="10" col="10"
+					value="#{inputFormBean.inputTextarea}" />
+
+				<p:outputLabel value="checkbox" />
+				<p:selectBooleanCheckbox value="#{inputFormBean.checkbox}" />
+
+				<p:outputLabel value="manyCheckbox" />
+				<p:selectManyCheckbox value="#{inputFormBean.manyCheckbox}">
+					<f:selectItem itemValue="sono 1" itemLabel="Item 1" />
+					<f:selectItem itemValue="sono 2" itemLabel="Item 2" />
+				</p:selectManyCheckbox>
+
+				<p:outputLabel value="selectOneRadio" />
+				<p:selectOneRadio value="#{inputFormBean.selectOneRadio}">
+					<f:selectItem itemValue="sono uno" itemLabel="Item 1" />
+					<f:selectItem itemValue="sono due" itemLabel="Item 2" />
+				</p:selectOneRadio>
+
+				<p:outputLabel value="selectOneMenu" />
+				<p:selectOneMenu value="#{inputFormBean.selectOneMenu}">
+					<f:selectItem itemValue="menu 1" itemLabel="Item 1" />
+					<f:selectItem itemValue="menu 2" itemLabel="Item 2" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="selectOneListbox" />
+				<p:selectOneListbox value="#{inputFormBean.selectOneListbox}">
+					<f:selectItem itemValue="lista 1" itemLabel="Item 1" />
+					<f:selectItem itemValue="lista 2" itemLabel="Item 2" />
+				</p:selectOneListbox>
+
+
+				<p:outputLabel value="inputHidden" />
+				<h:inputHidden value="#{inputFormBean.inputHidden}" />
+
+				<p:outputLabel value="img" />
+				<p:graphicImage value="/evolution.png" />
+
+				<p:outputLabel value="outputFormat" />
+				<h:outputFormat value="parameter 1 : {0}, parameter 2 : {1}">
+					<f:param value="Item 1" />
+					<f:param value="Item 2" />
+				</h:outputFormat>
+				
+				<p:commandButton value="Submit" action="#{inputFormBean.submit()}" process="@form" update="@form" />
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
+
+
+

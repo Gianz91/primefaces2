@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<script>
+		setInterval(function() {
+			rc();
+		}, 1000);
+	</script>
+</h:head>
+<h:body>
+	<h:form>
+		<ui:include src="/AutoInputComp.xhtml" />
+		<p:panel>
+			<p:panelGrid>
+				<p:commandButton value="Inserisci" action="#{autoBean.inserisci}"
+					process="@form" update="@this" />
+				<p:commandButton value="Output" update="@form" process="@form"
+					actionListener="#{autoBean.mostra}" />
+
+				<p:remoteCommand name="rc" update="contatore"
+					actionListener="#{autoBean.incrementa}" />
+				<p:commandButton value="Aumenta" process="@form" onclick="rc()" />
+				<p:outputLabel id="output"
+					value="#{autoBean.autoCompleteBean.singleHint}" />
+				<p:commandButton value="Nascosto" rendered="#{autoBean.nascosto}" />
+				<p:outputLabel id="contatore" value="#{autoBean.counter}" />
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

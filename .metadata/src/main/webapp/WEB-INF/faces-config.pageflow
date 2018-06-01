@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15276079134510" configfile="/primefaces/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf15277582555690" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15277582555691 pf15277582555692" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="page1.xhtml" id="pf15277582555693" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf15277582555691 pf15277582555692" path="/page1.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page1.xhtml" id="pf15277582555694" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf15277582555695" path="page1.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page2.xhtml" id="pf15277582555706" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15277582555695" path="/page2.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page2.xhtml" id="pf15277582555707" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf15277582555708" path="page2.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="page3.xhtml" id="pf15277582555709" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15277582555708" path="/page3.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="accettazione.xhtml" id="pf152777460127513" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf152777460127514" path="accettazione.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="ok.xhtml" id="pf152777460127515" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf152777460127514" path="ok.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="chatBox.xhtml" id="pf152777520874319" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf152777520874320" path="chatBox.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="registrationForm.xhtml" id="pf152777520874321" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf152777520874320" path="/registrationForm.xhtml"/>
+  <links id="pf15277582555691" target="pf15277582555693" source="pf15277582555690" outcome="page2"/>
+  <links id="pf15277582555692" target="pf15277582555693" source="pf15277582555690" outcome="page3"/>
+  <links id="pf15277582555695" target="pf15277582555706" source="pf15277582555694" outcome="page2"/>
+  <links id="pf15277582555708" target="pf15277582555709" source="pf15277582555707" outcome="page3"/>
+  <links id="pf152777460127514" target="pf152777460127515" source="pf152777460127513" outcome="vai" redirect="true"/>
+  <links id="pf152777520874320" target="pf152777520874321" source="pf152777520874319" outcome="mailpage"/>
+</pageflow:Pageflow>

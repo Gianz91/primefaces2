@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<script>
+		PrimeFaces.locales['it'] = {
+			closeText : 'Chiudi',
+			prevText : 'Precedente',
+			nextText : 'Prossimo',
+			monthNames : [ 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio',
+					'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre',
+					'Novembre', 'Dicembre' ],
+			monthNamesShort : [ 'Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu',
+					'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic' ],
+			dayNames : [ 'Domenica', 'Lunedì', 'Martedì', 'Mercoledì',
+					'Giovedì', 'Venerdì', 'Sabato' ],
+			dayNamesShort : [ 'Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab' ],
+			dayNamesMin : [ 'D', 'L', 'M', 'M ', 'G', 'V ', 'S' ],
+			weekHeader : 'Sett',
+			firstDay : 1,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Solo Tempo',
+			timeText : 'Ora',
+			hourText : 'Ore',
+			minuteText : 'Minuto',
+			secondText : 'Secondo',
+			currentText : 'Data Odierna',
+			ampm : false,
+			month : 'Mese',
+			week : 'Settimana',
+			day : 'Giorno',
+			allDayText : 'Tutto il Giorno'
+		};
+	</script>
+</h:head>
+<h:body>
+	<p:growl id="growl" autoUpdate="true" showSummary="true"
+		showDetail="true" sticky="true" />
+	<h:form id="form1" >
+		<p:panel id="registration">
+			<p:panelGrid columns="2">
+				<p:outputLabel id="utente" value="Nome Utente: " />
+				<p:inputText value="#{userBean.nome}" />
+				<p:outputLabel value="Password: " />
+				<p:password id="pass" value="#{userBean.password}" />
+				<p:outputLabel value="Conferma Password: " />
+				<p:password id="confermaPass" value="#{userBean.confirmPassword}">
+					<f:validator validatorId="userValidator" />
+					<f:attribute name="passOriginale" value="pass" />
+				</p:password>
+				<p:outputLabel id="calendarOutput" for="calendar"
+					value="Data di nascita: " />
+				<p:calendar id="calendar" value="#{userBean.dataDiNascita}"
+					mindate="#{now}" local="it" navigator="true" pattern="dd-MMM-yyyy" />
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:outputLabel value="AnniDiStudio: " />
+			</p:panelGrid>
+			<p:panelGrid id="study" columns="2">
+				<p:outputLabel for="calendarAnniDiStudioDa" value="Da: " />
+				<p:calendar id="calendarAnniDiStudioDa"
+					value="#{userBean.annoInizio}" local="it" mindate="1-Gen-1900">
+					<p:ajax event="dateSelect" update="calendarAnniDiStudioA" />
+				</p:calendar>
+				<p:outputLabel for="calendarAnniDiStudioA" value="A: " />
+				<p:calendar id="calendarAnniDiStudioA" value="#{userBean.annoFine}"
+					navigator="true" local="it" mindate="#{userBean.annoInizio}">
+					<f:validator validatorId="studioValidator" />
+					<f:attribute name="dataDaValid"
+						value="form1:calendarAnniDiStudioDa" />
+				</p:calendar>
+				<p:message for="calendarAnniDiStudioA" showSummary="false"
+					showDetail="true" />
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:commandButton update="registration" process="form1"
+					action="#{userBean.submit()}" value="Submit" />
+			</p:panelGrid>
+		</p:panel>
+		<ui:include src="/spedMailComposition.xhtml" />
+	</h:form>
+</h:body>
+</html>
